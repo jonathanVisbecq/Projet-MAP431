@@ -8,11 +8,41 @@
 \author{Jonathan Visbecq, Gaspard Férey}
 \title{Projet de MAP 431}
 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vect}[1]{\underline{#1}}
 
 \begin{document}
 
 \maketitle
 
-\tableofcontents
+\paragraph{1.1)} On a par intégration par parties :
+$$ \int_0^{+\infty} \phi(r)^2 dr = \left[ r \phi(r)^2 \right]_{0}^{+\infty} - \int_0^{+\infty} 2 r \phi(r) \phi'(r) dr $$
+or $\phi(r)$ est à support compact, donc $\left[ r \phi(r)^2 \right]_{0}^{+\infty} = 0$ et :
+\begin{eqnarray*}
+\int_0^{+\infty} \phi(r)^2 dr &=& - 2 \int_0^{+\infty} r \phi(r) \phi'(r) dr \\
+&\leq & 2 \sqrt{ \int_0^{+\infty} r^2 \phi'(r)^2 dr } \cdot \sqrt{ \int_0^{+\infty} \phi(r)^2 dr } \\
+\int_0^{+\infty} \phi(r)^2 dr &\leq & 4 \int_0^{+\infty} r^2 \phi'(r)^2 dr
+\end{eqnarray*}
+
+
+\paragraph{1.2)} On obtient par passage en coordonnées sphériques :
+\begin{eqnarray*}
+\int_{\R^3}  \frac{ \phi(x)^2 }{1+|x|^2} dx &=& \int_0^{+\infty} \int_0^{2\pi} \int_{-\pi /2}^{+\pi /2} \frac{\phi^2(r \vect{e_r}(\theta, \psi))}{1+r^2} r^2 \cos(\psi) d\psi d\theta dr \\
+&\leq & \int_0^{2\pi} \int_{-\pi /2}^{+\pi /2} \left( \int_0^{+\infty} \phi^2(r \vect{e_r}(\theta, \psi)) dr \right) \cos(\psi) d\psi d\theta
+\end{eqnarray*}
+Or $ \frac{\text{d}}{\text{d}r} \phi^2(r \vect{e_r}(\theta, \psi)) = \vect{\nabla \phi} (r \vect{e_r}(\theta, \psi) \cdot \vect{e_r} $, donc, d'après la question 1.1), on en déduit :
+\begin{eqnarray*}
+\int_{\R^3}  \frac{ \phi(x)^2 }{1+|x|^2} dx &\leq & \int_0^{2\pi} \int_{-\pi /2}^{+\pi /2} \int_0^{+\infty} 4 r^2 \left( \vect{\nabla \phi} (r \vect{e_r}(\theta, \psi) \cdot \vect{e_r} \right)^2 dr \cos(\psi) d\psi d\theta \\
+&\leq & 4 \int_0^{+\infty} \int_0^{2\pi} \int_{-\pi /2}^{+\pi /2}  | \vect{\nabla \phi}(r \vect{e_r}(\theta, \psi) |^2 r^2 \cos(\psi) d\psi d\theta dr \\
+&\leq & 4 \int_{\R^3} | \vect{\nabla \phi}(x) |^2 dx
+\end{eqnarray*}
+
+
+\paragraph{1.3)}
+Problème ici : Comment est défini $\nabla \phi$ ? \\
+On peut considérer $\phi \in \mathcal{C}^1(\R^3)$ ou alors $\phi \in \text{L}^2(\R^3)$ et penser à la dérivée faible de $\phi$ mais je pense pas que ce soit la bonne façon : on considère $\frac{\phi}{\sqrt{1+|x|^2}} \in \text{L}^2$, qui est une hypothèse assez faible, à mon avis c'est pas dans l'esprit de rajouter des hypothèses beaucoup plus fortes après.\\
+Sinon on peut essayer de définir une autre dérivée en intégrant par partie $\frac{\phi}{\sqrt{1+|x|^2}}$ contre une fonction test...
+
+
 
 \end{document}
